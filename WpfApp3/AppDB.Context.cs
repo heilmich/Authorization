@@ -13,10 +13,10 @@ namespace WpfApp3
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class AppDB : DbContext
+    public partial class DB : DbContext
     {
-        public AppDB()
-            : base("name=AppDB")
+        public DB()
+            : base("name=DB")
         {
         }
     

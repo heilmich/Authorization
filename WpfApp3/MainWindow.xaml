@@ -11,6 +11,7 @@
     </Window.Resources>
     <Grid>
         
+        <!--Вкладки-->
         <TabControl>
             <TabControl.Background>
                 <ImageBrush ImageSource="mainbackground.jpg"/>
@@ -20,51 +21,57 @@
             <TabItem Header="Вход">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                    
-                    <Label HorizontalAlignment="Center" VerticalAlignment="Top" Name="AuthPanelLabel">Вход</Label>
+
+                    <Label Name="AuthPanelLabel" HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Top">Вход</Label>
                     
                     <!--Ввод логина-->
-                    <Label Margin="0,20,0,0">Введите логин</Label>
-                    <TextBox Height="20" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Name="AuthPanelLoginField"></TextBox>
+                    <Label FontSize="15" Margin="0,20,0,0">Введите логин</Label>
+                    <TextBox Name="AuthPanelLoginField" Height="20" Width="180"></TextBox>
                     
                     <!--Ввода пароля-->
-                    <Label Margin="0,20,0,0">Введите пароль</Label>
-                    <PasswordBox Height="20" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Name="AuthPanelPassField"></PasswordBox>
+                    <Label FontSize="15" Margin="0,20,0,0">Введите пароль</Label>
+                    <PasswordBox Name="AuthPanelPassField" Height="20" Width="180"></PasswordBox>
                     
                     <!--Результат входа-->
-                    <Label Name="AuthPanelResult" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0"></Label>
+                    <Label FontSize="15" Name="AuthPanelResult" Margin="0,10,0,0"></Label>
                     
                     <!--Кнопка входа-->
-                    <Button Height="20" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" Name="AuthPanelSubmitBtn" Click="SignIn">Войти</Button>
+                    <Button Name="AuthPanelSubmitBtn" Height="20" Width="80" Margin="0,20,0,0" Click="SignIn">Войти</Button>
                 </StackPanel>
             </TabItem>
 
             <!--Вкладка регистрации-->
             <TabItem Header="Регистрация">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    
-                    <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Name="SignPanelLabel">Регистрация</Label>
+
+                    <Label FontSize="18" Name="SignPanelLabel" HorizontalAlignment="Center" VerticalAlignment="Top">Регистрация</Label>
 
                     <!--Ввод логина-->
-                    <Label Margin="0,20,0,0">Введите логин</Label>
-                    <TextBox Grid.Row="2" Grid.Column="2" Height="20" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Name="SignPanelLoginField"></TextBox>
+                    <Label FontSize="15" Margin="0,20,0,0">Введите логин</Label>
+                    <TextBox Name="SignPanelLoginField" Height="20" Width="180"></TextBox>
 
                     <!--Ввод пароля-->
-                    <Label Margin="0,20,0,0">Введите пароль</Label>
-                    <PasswordBox Grid.Row="2" Grid.Column="2" Height="20" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Name="SignPanelPassField"></PasswordBox>
+                    <Label FontSize="15" Margin="0,20,0,0">Введите пароль</Label>
+                    <PasswordBox Name="SignPanelPassField" Height="20" Width="180"></PasswordBox>
 
                     <!--Кнопка регистрации-->
-                    <Button Grid.Row="2" Grid.Column="2" Height="25" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,0,0" Name="SignPanelSubmitBtn" Click="SignUpUser">Зарегистрироваться</Button>
+                    <Button Name="SignPanelSubmitBtn" Height="25" Width="150" Margin="0,30,0,0" Click="SignUpUser">Зарегистрироваться</Button>
                 </StackPanel>
             </TabItem>
 
             <!--Вкладка поиска-->
             <TabItem Header="Поиск">
+                
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Label>Введите логин</Label>
-                    <TextBox Width="200" Name="SearchField"></TextBox>
-                    <Button Width="120" Name="SearchBtn" Click="UserSearch">Выполнить поиск</Button>
-                    <Label Name="SearchResult">Результат</Label>
+
+                    <Label FontSize="15" >Введите логин</Label>
+                    <RadioButton GroupName="UserProperties" Content="По ID" Name="rbId"></RadioButton>
+                    <RadioButton GroupName="UserProperties" Content="По логину" Name="rbLogin"></RadioButton>
+                    <RadioButton GroupName="UserProperties" Content="По паролю" Name="rbPass"></RadioButton>
+                    <TextBox Margin="0,20,0,0" Width="200" Name="SearchField"></TextBox>
+                    <Button Margin="0,20,0,0" Width="120" Name="SearchBtn" Click="UserSearch">Выполнить поиск</Button>
+
+                    <Label FontSize="15" Margin ="0,20,0,0" Name="SearchResult">Результат</Label>
                 </StackPanel>
 
             </TabItem>
