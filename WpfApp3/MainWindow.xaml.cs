@@ -20,7 +20,7 @@ namespace WpfApp3
     public class UserContext : DbContext
     {
         public UserContext() :
-            base("DB")
+            base("HeilmichDM")
         { }
 
         public DbSet<User> Users { get; set; }
@@ -44,8 +44,7 @@ namespace WpfApp3
             //Запись данных учетки в БД
             using (UserContext db = new UserContext()) 
             {
-                
-                User user = new User {Login = SignPanelLoginField.Text, Password = SignPanelPassField.Password };
+                User user = new User {Login = SignPanelLoginField.Text, Password = SignPanelPassField.Password, Date_Last_Login = DateTime.Now, LoginTime = 0  };
                 db.Users.Add(user);
                 db.SaveChanges();
             }
@@ -78,6 +77,42 @@ namespace WpfApp3
                 {
                     return true;
                     
+                }
+            }
+            if (HasUpperChar == false)
+            {
+                MessageBox.Show("Нужна как минимум одна заглавная буква", "Ошибка");
+                return false;
+            }
+            return true;
+
+        }
+
+        private bool SignInCheck()
+        {
+            //Проверка длины пароля
+            if (AuthPanelPassField.Password.Length < 8)
+            {
+                MessageBox.Show("Пароль слишком короткий", "Ошибка");
+                return false;
+            }
+
+            //Проверка длины логина
+            if (AuthPanelLoginField.Text.Length < 4)
+            {
+                MessageBox.Show("Логин слишком короткий", "Ошибка");
+                return false;
+            }
+
+            //Проверка на наличие хотя бы одной заглавной буквы
+            var str = AuthPanelPassField.Password.ToArray();
+            bool HasUpperChar = false;
+            foreach (var item in str)
+            {
+                if (char.IsUpper(item))
+                {
+                    return true;
+
                 }
             }
             if (HasUpperChar == false)
@@ -134,6 +169,10 @@ namespace WpfApp3
 
             //Попытка входа
             AuthPanelResult.Content = "Выполняем вход...";
+
+            //Проверка на соответствие правилам ввода логина и пароля
+            if (SignInCheck() == false) return;
+
             using (UserContext db = new UserContext())
             {
                 var users = from p in db.Users
@@ -142,6 +181,9 @@ namespace WpfApp3
                 foreach (var item in users)
                 {
                     AuthPanelResult.Content = "Вход выполнен";
+                    AppWindow appWindow = new AppWindow(item.Id);
+                    appWindow.Show();
+                    this.Close();
                     return;
                 }
                 //Действие при неудачном входе

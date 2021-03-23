@@ -3,12 +3,17 @@
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="Id" />
+      <PropertyRef Name="Login" />
+      <PropertyRef Name="Password" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Login" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date_Last_Login" Type="DateTime" Precision="3" />
+    <Property Name="LoginTime" Type="Int32" />
+    <Property Name="Avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
-  <EntityContainer Name="DB" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="ApplicationDB" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="User" EntityType="Self.User" />
   </EntityContainer>
 </Schema>
