@@ -24,11 +24,11 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel>
-            <Label Name="TimeLabel"></Label>
-            <Label Name="IdLabel"></Label>
-            <Label Name="LoginLabel"></Label>
-            <Label Name="DateLastLoginLabel"></Label>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Label Name="TimeLabel" FontSize="17">Time: </Label>
+            <Label Name="IdLabel" FontSize="17">ID: </Label>
+            <Label Name="LoginLabel" FontSize="17">Login: </Label>
+            <Label Name="DateLastLoginLabel" FontSize="15">TimeLastLogin:</Label>
         </StackPanel>
     </Grid>
 </Window>

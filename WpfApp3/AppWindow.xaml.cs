@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +25,9 @@ namespace WpfApp3
         public AppWindow(int currentId)
         {
             InitializeComponent();
+            //Отображение данных аккаунта
             currentUserId = currentId;
+            
             using (UserContext db = new UserContext())
             {
                 var users = from p in db.Users
@@ -33,14 +35,20 @@ namespace WpfApp3
                             select p;
                 foreach (var p in users)
                 {
+                    TimeLabel.Content = p.LoginTime;
                     IdLabel.Content = "ID: " + p.Id;
                     LoginLabel.Content = "Логин: " + p.Login;
                     DateLastLoginLabel.Content = "Дата последнего входа: " + p.Date_Last_Login;
                 }
             }
-            Timer timer = new Timer(AddMinute,0,60000,60000);
+
+            //Косячный таймер
+            TimerCallback tm = new TimerCallback(AddMinute);
+            Timer timer = new Timer(tm,999,0,60000);
+
         }
 
+        
         public void AddMinute(Object stateInfo)
         {
             using (UserContext db = new UserContext())
