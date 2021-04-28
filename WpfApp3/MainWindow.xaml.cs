@@ -39,7 +39,7 @@ namespace WpfApp3
         private void SignUpUser(object sender, RoutedEventArgs e)
         {
             //Проверка на соответствие правилам ввода логина и пароля
-            if (SignUpCheck() == false) return;
+            if (Authorization.SignCheck(SignPanelPassField.Password, SignPanelLoginField.Text, this) == false) return;
 
             //Запись данных учетки в БД
             using (UserContext db = new UserContext()) 
@@ -52,118 +52,6 @@ namespace WpfApp3
             MessageBox.Show("Учетная запись зарегестрирована", "Сообщение");
         }
 
-        private bool SignUpCheck()
-        {
-            //Проверка длины пароля
-            if (SignPanelPassField.Password.Length< 8)
-            {
-                MessageBox.Show("Пароль слишком короткий","Ошибка");
-                return false;
-            }
-            
-            //Проверка длины логина
-            if (SignPanelLoginField.Text.Length< 4) 
-            {
-                MessageBox.Show("Логин слишком короткий", "Ошибка");
-                return false;            
-            }
-
-            //Проверка на наличие хотя бы одной заглавной буквы
-            var str = SignPanelPassField.Password.ToArray();
-            bool HasUpperChar = false;
-            foreach (var item in str) 
-            {
-                if (char.IsUpper(item))
-                {
-                    return true;
-                    
-                }
-            }
-            if (HasUpperChar == false)
-            {
-                MessageBox.Show("Нужна как минимум одна заглавная буква", "Ошибка");
-                return false;
-            }
-            return true;
-
-        }
-
-        private bool SignInCheck()
-        {
-            //Проверка длины пароля
-            if (AuthPanelPassField.Password.Length < 8)
-            {
-                MessageBox.Show("Пароль слишком короткий", "Ошибка");
-                return false;
-            }
-
-            //Проверка длины логина
-            if (AuthPanelLoginField.Text.Length < 4)
-            {
-                MessageBox.Show("Логин слишком короткий", "Ошибка");
-                return false;
-            }
-
-            //Проверка на наличие хотя бы одной заглавной буквы
-            var str = AuthPanelPassField.Password.ToArray();
-            bool HasUpperChar = false;
-            foreach (var item in str)
-            {
-                if (char.IsUpper(item))
-                {
-                    return true;
-
-                }
-            }
-            if (HasUpperChar == false)
-            {
-                MessageBox.Show("Нужна как минимум одна заглавная буква", "Ошибка");
-                return false;
-            }
-            return true;
-
-        }
-        private void UserSearch(object sender, RoutedEventArgs e)
-        {
-            if (rbId.IsChecked == true) {
-                using (UserContext db = new UserContext())
-                {
-                    int searchId = Convert.ToInt32(SearchField.Text);
-                    var users = db.Users.Where(p => p.Id == searchId);
-                    foreach (var item in users)
-                    {
-                        SearchResult.Content = "Найден пользователь: ID" +item.Id + ", логин " + item.Login.Trim(' ') + ", пароль " +item.Password.Trim(' ');
-                        return;
-                    }
-                }
-            }
-            if (rbLogin.IsChecked == true)
-            {
-                using (UserContext db = new UserContext())
-                {
-                    var users = db.Users.Where(p => p.Login == SearchField.Text);
-                    foreach (var item in users)
-                    {
-                        SearchResult.Content = "Найден пользователь: ID" + item.Id + ", логин " + item.Login.Trim(' ') + ", пароль " + item.Password.Trim(' ');
-                        return;
-                    }
-                }
-            }
-            if (rbPass.IsChecked == true)
-            {
-                using (UserContext db = new UserContext())
-                {
-                    var users = db.Users.Where(p => p.Password == SearchField.Text);
-                    foreach (var item in users)
-                    {
-                        SearchResult.Content = "Найден пользователь: ID" + item.Id + ", логин " + item.Login.Trim(' ') + ", пароль " + item.Password.Trim(' ');
-                        return;
-                    }
-                }
-            }
-            MessageBox.Show("Пользователь не найден", "Сообщение");
-        }
-
         private void SignIn(object sender, RoutedEventArgs e)
         {
 
@@ -171,7 +59,7 @@ namespace WpfApp3
             AuthPanelResult.Content = "Выполняем вход...";
 
             //Проверка на соответствие правилам ввода логина и пароля
-            if (SignInCheck() == false) return;
+            if (Authorization.SignCheck(AuthPanelPassField.Password, AuthPanelLoginField.Text, this) == false) return;
 
             using (UserContext db = new UserContext())
             {
@@ -190,6 +78,7 @@ namespace WpfApp3
                 AuthPanelResult.Content = "Вход не выполнен";
             }
         }
+
     }
 
 }

@@ -70,6 +70,7 @@
     <Compile Include="AppWindow.xaml.cs">
       <DependentUpon>AppWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Authorization.cs" />
     <Compile Include="HeilmichDM.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

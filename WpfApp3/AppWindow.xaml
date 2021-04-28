@@ -14,21 +14,17 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <Label Name="TimeLabel"></Label>
-            <Label Name="IdLabel"></Label>
-            <Label Name="LoginLabel"></Label>
-            <Label Name="DateLastLoginLabel"></Label>
+            <Label Name="TimeLabel">123</Label>
+            <Label Name="IdLabel">123</Label>
+            <Label Name="LoginLabel">123</Label>
+            <Label Name="DateLastLoginLabel">123</Label>
         </StackPanel>
     </Grid>
 </Window>

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace WpfApp3
 {
@@ -21,44 +22,63 @@ namespace WpfApp3
 
     public partial class AppWindow : Window
     {
-        int currentUserId;
         public AppWindow(int currentId)
         {
             InitializeComponent();
-            currentUserId = currentId;
+
+            Authorization.currentUserId = currentId;
+
             using (UserContext db = new UserContext())
             {
+               
                 var users = from p in db.Users
-                            where (currentUserId == p.Id)
+                            where (Authorization.currentUserId == p.Id)
                             select p;
+                
                 foreach (var p in users)
                 {
                     IdLabel.Content = "ID: " + p.Id;
                     LoginLabel.Content = "Логин: " + p.Login;
                     DateLastLoginLabel.Content = "Дата последнего входа: " + p.Date_Last_Login;
+                    TimeLabel.Content = "Вы были в сети уже " + Convert.ToString(p.LoginTime) + " минут с момента создания аккаунта";
                 }
             }
-            Timer timer = new Timer(AddMinute,0,60000,60000);
+            TimerSetup();
+
         }
 
-        public void AddMinute(Object stateInfo)
+        
+        public void TimerSetup() 
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Tick += AddMinuteAsync;
+            timer.Interval = TimeSpan.FromMinutes(1);
+            timer.Start();
+        }
+        
+        async void AddMinuteAsync(object sender, EventArgs e) 
+        {
+            await Task.Run(()=>AddMinute());
+        }
+        void AddMinute()
         {
             using (UserContext db = new UserContext())
             {
                 var users = from p in db.Users
-                            where (currentUserId == p.Id)
+                            where (Authorization.currentUserId == p.Id)
                             select p;
                 foreach (var p in users)
                 {
                     p.LoginTime += 1;
-                    TimeLabel.Content = "Вы были в сети уже " + p.LoginTime + " минут с момента создания аккаунта";
+                    TimeLabelUpdate(p);
                     db.SaveChanges();
                 }
-
-                
             }
         }
-        
-        
+
+        void TimeLabelUpdate(User p) 
+        {
+            TimeLabel.Content = "Вы были в сети уже " + Convert.ToString(p.LoginTime) + " минут с момента создания аккаунта";
+        }
     }
 }
