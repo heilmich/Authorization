@@ -21,21 +21,22 @@
             <TabItem Header="Вход">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                    <Label Name="AuthPanelLabel" HorizontalAlignment="Center" FontSize="22" VerticalAlignment="Top">Вход</Label>
+
+                    <Label Name="AuthPanelLabel" HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Top">Вход</Label>
                     
                     <!--Ввод логина-->
-                    <Label FontSize="17" Margin="0,20,0,0">Введите логин</Label>
+                    <Label FontSize="15" Margin="0,20,0,0">Введите логин</Label>
                     <TextBox Name="AuthPanelLoginField" Height="20" Width="180"></TextBox>
                     
                     <!--Ввода пароля-->
-                    <Label FontSize="17" Margin="0,20,0,0">Введите пароль</Label>
+                    <Label FontSize="15" Margin="0,20,0,0">Введите пароль</Label>
                     <PasswordBox Name="AuthPanelPassField" Height="20" Width="180"></PasswordBox>
                     
                     <!--Результат входа-->
-                    <Label FontSize="17" Name="AuthPanelResult" Margin="0,10,0,0"></Label>
+                    <Label FontSize="15" Name="AuthPanelResult" Margin="0,10,0,0"></Label>
                     
                     <!--Кнопка входа-->
-                    <Button Name="AuthPanelSubmitBtn" Height="20" Width="80" FontSize="15" Margin="0,20,0,0" Click="SignIn">Войти</Button>
+                    <Button Name="AuthPanelSubmitBtn" Height="20" Width="80" Margin="0,20,0,0" Click="SignIn">Войти</Button>
                 </StackPanel>
             </TabItem>
 
@@ -43,41 +44,26 @@
             <TabItem Header="Регистрация">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                    <Label FontSize="22" Name="SignPanelLabel" HorizontalAlignment="Center" VerticalAlignment="Top">Регистрация</Label>
+                    <Label FontSize="18" Name="SignPanelLabel" HorizontalAlignment="Center" VerticalAlignment="Top">Регистрация</Label>
 
                     <!--Ввод логина-->
-                    <Label FontSize="17" Margin="0,20,0,0">Введите логин</Label>
+                    <Label FontSize="15" Margin="0,20,0,0">Введите логин</Label>
                     <TextBox Name="SignPanelLoginField" Height="20" Width="180"></TextBox>
 
                     <!--Ввод пароля-->
-                    <Label FontSize="17" Margin="0,20,0,0">Введите пароль</Label>
+                    <Label FontSize="15" Margin="0,20,0,0">Введите пароль</Label>
                     <PasswordBox Name="SignPanelPassField" Height="20" Width="180"></PasswordBox>
 
+                    <StackPanel Margin="0,20,0,0">
+                        <TextBlock FontSize="15" Text="Выберите роль"/>
+                        <RadioButton GroupName="RoleGroup" Name="UserRB" FontSize="15" Content="Пользователь"/>
+                        <RadioButton GroupName="RoleGroup" Name="AdminRB" FontSize="15" Content="Админ"/>
+                    </StackPanel>
+
                     <!--Кнопка регистрации-->
-                    <Button Name="SignPanelSubmitBtn" FontSize="15" Height="25" Width="150" Margin="0,30,0,0" Click="SignUpUser">Зарегистрироваться</Button>
+                    <Button Name="SignPanelSubmitBtn" Height="25" Width="150" Margin="0,30,0,0" Click="SignUpUser">Зарегистрироваться</Button>
                 </StackPanel>
-            </TabItem>
-
-            <!--Вкладка поиска-->
-            <TabItem Header="Поиск">
-                
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-
-                    <Label FontSize="22" >Введите логин</Label>
-                    
-                    <RadioButton GroupName="UserProperties" Content="По ID" Name="rbId" FontSize="14"></RadioButton>
-                    <RadioButton GroupName="UserProperties" Content="По логину" Name="rbLogin" FontSize="14"></RadioButton>
-                    <RadioButton GroupName="UserProperties" Content="По паролю" Name="rbPass" FontSize="14"></RadioButton>
-                    
-                    <TextBox Margin="0,20,0,0" Width="200" Name="SearchField"></TextBox>
-                    
-                    <Button Margin="0,20,0,0" Width="120" FontSize="15" Name="SearchBtn" Click="UserSearch">Выполнить поиск</Button>
-
-                    <Label FontSize="15" Margin ="0,20,0,0" Name="SearchResult">Результат</Label>
-                </StackPanel>
-
             </TabItem>
         </TabControl>
-        
     </Grid>
 </Window>

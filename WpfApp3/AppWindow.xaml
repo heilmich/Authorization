@@ -14,21 +14,43 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2" Grid.ColumnSpan="2">
-            <Label Name="TimeLabel" FontSize="17">Time: </Label>
-            <Label Name="IdLabel" FontSize="17">ID: </Label>
-            <Label Name="LoginLabel" FontSize="17">Login: </Label>
-            <Label Name="DateLastLoginLabel" FontSize="15">TimeLastLogin:</Label>
-        </StackPanel>
+        <Border BorderThickness="2" BorderBrush="Gray" CornerRadius="10" Background="AntiqueWhite" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,5,8,5">
+                <TextBlock Name="TimeLabel" TextWrapping="Wrap">123</TextBlock>
+                <TextBlock Name="IdLabel" TextWrapping="Wrap">123</TextBlock>
+                <TextBlock Name="LoginLabel" TextWrapping="Wrap">123</TextBlock>
+                <TextBlock Name="RoleLabel" TextWrapping="Wrap">123</TextBlock>
+                <TextBlock Name="DateLastLoginLabel" TextWrapping="Wrap">123</TextBlock>
+            </StackPanel>
+        </Border>
+        <Border MinHeight="50" MinWidth="100" Grid.Column="1" Grid.RowSpan="3" BorderThickness="2" BorderBrush="Gray" CornerRadius="10" Background="AntiqueWhite" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+                <ScrollViewer>
+                    <StackPanel>
+                        <StackPanel Name="MessagePanel" MinHeight="50">
+                            
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox MinWidth="100" Name="MessageTB"></TextBox>
+                            <Button Name="SendBtn" Click="SendMessage" VerticalAlignment="Bottom" HorizontalAlignment="Right">Отправить</Button>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>
+        </Border>
+
+        <Border MinHeight="50" MinWidth="50" Grid.Column="2" Grid.RowSpan="3" BorderThickness="2" BorderBrush="Gray" CornerRadius="10" Background="AntiqueWhite" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <StackPanel Name="UsersSP">
+                <ComboBox Name="usersCB" SelectionChanged="GetMessages">
+
+                </ComboBox>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
